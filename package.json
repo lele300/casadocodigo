@@ -1,0 +1,22 @@
+{
+  "name": "casadocodigo",
+  "version": "1.0.0",
+  "description": "Site da Casa do Código",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lele300/casadocodigo.git"
+  },
+  "author": "Leonardo Lopes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lele300/casadocodigo/issues"
+  },
+  "homepage": "https://github.com/lele300/casadocodigo#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
