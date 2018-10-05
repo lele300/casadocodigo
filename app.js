@@ -1,9 +1,7 @@
-const express = require('express');
-
-const app = express(); //Retorna um objeto que contém a API do Express, responsável pelas requisições HTTP e etc.
-
-//.set() serve para definirmos variáveis para dentro do Express que passem por todo o sistema
-app.set("view engine", "ejs");
+// require vai executar o script do arquivo que está no caminho './config/express'
+// e vai retornar a função do module.exports
+const configExpress = require('./config/express');
+const app = configExpress();
 
 // .get("url",callback) trata requisições que usam o method HTTP GET
 app.get("/produtos", function(res,resp){
