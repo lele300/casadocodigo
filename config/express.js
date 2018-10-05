@@ -3,13 +3,15 @@
 // O padrão CommonJS, exige que seja disponibilizado a variável module que possui o atributo exports
 // Este atributo recebe a função que queremos retornar.
 
-module.exports = () => {
-    const express = require("express"); //Retorna uma função não inicializada que contém a API do Express, responsável pelas requisições HTTP e etc.
+const express = require("express"); //Retorna uma função não inicializada que contém a API do Express, responsável pelas requisições HTTP e etc.
     
-    const app = express(); // const app recebe o objeto que contém as funções do Express
+const app = express(); // const app recebe o objeto que contém as funções do Express
 
-    //.set() serve para definirmos variáveis para dentro do Express que passem por todo o sistema
-    app.set("view engine", "ejs");
+//.set() serve para definirmos variáveis para dentro do Express que passem por todo o sistema
+app.set("view engine", "ejs");
+app.set("views","./app/views");
+
+module.exports = () => {
     return app;
 }
 
