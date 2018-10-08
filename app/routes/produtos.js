@@ -9,7 +9,7 @@ module.exports = (app) => {
         // quando o SELECT for efetuado.
         // O primeiro parâmetro da função é o erro e o segundo o retorno da consulta
 
-        connectionFactory.query('select * from livros', function(err, results){
+        connectionFactory.query('select * from livros', (err, results) => {
             // Obs: o EJS sempre busca os arquivos numa pasta default "views" na raiz do app
             //.render() por parâmetro a view que será renderizada e o objeto com a chave que será 
             // acessada na view.

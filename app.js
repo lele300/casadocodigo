@@ -6,6 +6,6 @@ const app = require('./config/express')();
 const rotasDosProdutos = require("./app/routes/produtos")(app);
 
 // listen(porta, fn callback)
-app.listen(3000, function(){
+app.listen(3000, () => {
     console.log('Servidor rodando...');
 });
