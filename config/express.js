@@ -9,6 +9,8 @@ const app = express(); // const app recebe o objeto que contém as funções do 
 
 //.set() serve para definirmos variáveis para dentro do Express que passem por todo o sistema
 app.set("view engine", "ejs");
+
+// estamos alterando o caminho padrão da pasta views para /app/views
 app.set("views","./app/views");
 
 module.exports = () => {
