@@ -22,7 +22,9 @@ module.exports = (app) => {
         const connection = app.infra.connectionFactory(); //Instanciando objeto Connection do MySQL
         const produtosDAO = new app.infra.ProdutosDAO(connection); //Instanciando a classe ProdutosDAO, passando o objeto Connection para o módulo de ProdutosDAO.js
         produtosDAO.salva(produto, (err, resultados) => {
-            resp.render("produtos/lista");
+            produtosDAO.lista((err, resultados) => {
+                resp.render("produtos/lista", {lista : resultados});
+            });
         });
     });
 }
