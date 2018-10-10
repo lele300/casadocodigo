@@ -11,4 +11,18 @@ module.exports = (app) => {
         
         connection.end();
     });
+
+    app.get("/produtos/form", (req,resp) => {
+        resp.render("produtos/form");
+    });
+
+    app.post("/produtos/salva", (req,resp) => {
+
+        const produto = req.body; //Recuperando os valores do formulário.
+        const connection = app.infra.connectionFactory(); //Instanciando objeto Connection do MySQL
+        const produtosDAO = new app.infra.ProdutosDAO(connection); //Instanciando a classe ProdutosDAO, passando o objeto Connection para o módulo de ProdutosDAO.js
+        produtosDAO.salva(produto, (err, resultados) => {
+            resp.render("produtos/lista");
+        });
+    });
 }
