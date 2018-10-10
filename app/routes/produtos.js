@@ -18,7 +18,7 @@ module.exports = (app) => {
 
     app.post("/produtos/salva", (req,resp) => {
 
-        const produto = req.body; //Recuperando os valores do formulário.
+        const produto = req.body; // Recuperando os dados do form graças ao body-parser. Retorna em JSON.
         const connection = app.infra.connectionFactory(); //Instanciando objeto Connection do MySQL
         const produtosDAO = new app.infra.ProdutosDAO(connection); //Instanciando a classe ProdutosDAO, passando o objeto Connection para o módulo de ProdutosDAO.js
         produtosDAO.salva(produto, (err, resultados) => {
