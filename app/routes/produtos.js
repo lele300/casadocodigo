@@ -1,4 +1,4 @@
-//Módulo que carrega as rotas (sendo carregado pelo auto-load em express.js)
+//Módulo que carrell as rotas (sendo carregado pelo auto-load em express.js)
 module.exports = (app) => {
     app.get("/produtos", (req, resp) => {
         const connection = app.infra.connectionFactory(); //Esse é o caminho que está o arquivo connectionFactory.js que retorna a function createDBConnection().
@@ -19,17 +19,24 @@ module.exports = (app) => {
     });
 
     app.get("/produtos/form", (req, resp) => {
-        resp.render("produtos/form");
+        resp.render("produtos/form", { erros : {}, produto : {} });
     });
 
     // Podemos usar a mesma URL para os serviços de produtos. O que os diferencia são os verbos HTTP utilizados
     app.post("/produtos", (req, resp) => {
         const produto = req.body; // Recuperando os dados do form graças ao body-parser. Retorna em JSON.
+        req.assert("titulo","Título é necessário").notEmpty();         // .assert(campo,mensagem) recebe o campo para validar e a mensagem associada.
+        req.assert("preco", "Formato inválido").isFloat();
+        const erros = req.validationErrors(); // Retorna os erros em uma lista de objetos
+        if(erros) {
+            resp.render('produtos/form',{ erros, produto });
+            return;
+        }
         const connection = app.infra.connectionFactory(); //Instanciando objeto Connection do MySQL
         const produtosDAO = new app.infra.ProdutosDAO(connection); //Instanciando a classe ProdutosDAO, passando o objeto Connection para o módulo de ProdutosDAO.js
         produtosDAO.salva(produto, (err, resultados) => {
             resp.redirect("/produtos");
         });
         connection.end();
-    });
+    }); 
 }
