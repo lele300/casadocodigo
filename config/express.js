@@ -2,7 +2,7 @@ const express = require('express');
 const load = require("express-load");
 const bodyParse = require("body-parser"); // Extrai os dados do corpo da requisição e joga na propriedade req.body
 
-module.exports =  () => {
+module.exports = () => {
     const app = express();
     app.set('view engine', 'ejs');
     app.set('views', './app/views');
