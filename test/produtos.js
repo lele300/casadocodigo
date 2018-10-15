@@ -8,4 +8,16 @@ describe("#ProdutosController", () => {
             .expect(200,done);// O status da requisição for 200 e a função done é usada para que 
             // a próxima instrução só seja executada quando o callback for completamente executado.
     });
+    
+    it("#Cadastro de Produtos com dados inválidos", done => {
+        request.post("/produtos")
+            .send({titulo : "", descricao : "Novo Livro"})
+            .expect(400,done);
+    });
+
+    it("#Cadastro de Produtos com dados válidos", done => {
+        request.post("/produtos")
+            .send({titulo : "Livro Nodee.JS", descricao : "Novo Livro", preco : "20.40"})
+            .expect(302,done);
+    });
 });
