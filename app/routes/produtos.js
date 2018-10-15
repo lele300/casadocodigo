@@ -28,12 +28,13 @@ module.exports = (app) => {
         req.assert("titulo", "Título é necessário").notEmpty();         // .assert(campo,mensagem) recebe o campo para validar e a mensagem associada.
         req.assert("preco", "Formato inválido").isFloat();
         const erros = req.validationErrors(); // Retorna os erros em uma lista de objetos
-        if (erros) { // erros.length != 0 
+        if (erros) { // [] retorna true.
             resp.format({
                 html: () => resp.status(400).render('produtos/form', { erros : erros, produto : produto })
                 ,
                 json: () => resp.status(400).json(erros)
             });
+            return;
         }
         const connection = app.infra.connectionFactory(); //Instanciando objeto Connection do MySQL
         const produtosDAO = new app.infra.ProdutosDAO(connection); //Instanciando a classe ProdutosDAO, passando o objeto Connection para o módulo de ProdutosDAO.js
