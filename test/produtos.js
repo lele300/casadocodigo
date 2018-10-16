@@ -1,6 +1,15 @@
 const express = require("../config/express")();
 const request = require("supertest")(express); //Lib de testes | Passando as configs do servidor Express
+const DataBaseCleaner = require("database-cleaner"); // Lib para limpar o banco de dados do teste
 describe("#ProdutosController", () => {
+    //Antes de cada teste ser executado, ele limpa o banco de dados.
+    beforeEach(done => {
+        const dbCleaner = new DataBaseCleaner("mysql");
+        dbCleaner.clean(express.infra.connectionFactory(), () => {
+            done();
+        });
+    });
+
     it("#Listagem JSON", done => {
         request.get("/produtos") // Faz uma requisição para "/produtos"
             .set("Accept", "application/json") // Seta a resposta como application/json
