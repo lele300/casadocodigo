@@ -21,5 +21,18 @@ module.exports = () => {
         .then("infra") // Carrega os módulos da pasta "infra" auto.
         .into(app); // Coloca os módulos carregados dentro do objeto do express.
 
+    app.use((req, resp, next) => {
+        resp.status(404).render("erros/404")
+        next(); //Avança para o próximo fluxo do Express
+    });
+
+    app.use(function(error,req,res,next){
+        if(process.env.NODE_ENV == 'production') {
+            res.status(500).render('erros/500');
+            return;
+        }
+        next(error);
+    });
+
     return app; // Retonar a variável do express já configurada em forma de função.
 };

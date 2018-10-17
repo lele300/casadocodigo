@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    app.get("/", (res, resp) => {
+    app.get("/", (res, resp, next) => {
         const connection = app.infra.connectionFactory();
         const produtosDAO = new app.infra.ProdutosDAO(connection);
         produtosDAO.lista((erros, resultados) => {
