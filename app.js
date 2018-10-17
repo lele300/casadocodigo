@@ -7,6 +7,8 @@ const io = require("socket.io")(http);
 // Criando o nome "io" e o valor dela é o objeto do WebSocket.
 app.set('io',io);
 
-http.listen(3000, () => {
-    console.log('Servidor rodando...');
+const porta = process.env.PORT || 3000;
+
+http.listen(porta, () => {
+    console.log('Servidor rodando no heroku...');
 });
